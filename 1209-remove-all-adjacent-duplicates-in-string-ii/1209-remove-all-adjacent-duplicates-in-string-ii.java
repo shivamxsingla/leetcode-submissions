@@ -18,13 +18,13 @@ class Solution {
             }
             if(st.peek().count==k) st.pop();
         }
-        String ans = new String();
+        StringBuilder ans = new StringBuilder();
        while(st.size()!=0) {
            pair p = st.pop();
            int times=p.count;
            char c= p.ch;
-           for(int i=0; i<times; i++)  ans=c+ans;
+           for(int i=0; i<times; i++)  ans = ans.append(c);
        }
-        return ans;
+        return ans.reverse().toString();
     }
 }
