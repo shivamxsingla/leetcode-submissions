@@ -14,25 +14,14 @@
  * }
  */
 class Solution {
-    List<Integer> list = new ArrayList<>();
-    public List<Integer> inorderTraversal(TreeNode root) {
-        if(root == null)
-            return list;
-        
-        else
-        {
-            inorderTraversal(root.left);
-            list.add(root.val);
-            inorderTraversal(root.right);
-        }
-        return list;
-    }
     public boolean isValidBST(TreeNode root) {
-        List<Integer> a= inorderTraversal(root);
-        int size= a.size();
-        for(int i=0; i<size-1; i++){
-            if(a.get(i)>=a.get(i+1)) return false;
-        }
-        return true;
+        return explore(root, Long.MIN_VALUE, Long.MAX_VALUE);
+    }
+    public boolean explore(TreeNode root, long min, long max) {
+        if(root == null)
+            return true;
+        if(root.val >= max || root.val <= min)
+            return false;
+        return explore(root.left, min, root.val) && explore(root.right, root.val, max);
     }
 }
