@@ -1,5 +1,5 @@
 class Solution {
-    static int [][] dp = new int[502][502];
+    static int [][] dp;
     public static int helper(int []nums1, HashMap<Integer, ArrayList<Integer>> map, int index, int prev){
         if(prev!=-1 && dp[index][prev+1]!=-1) return dp[index][prev+1];
         if(index == nums1.length) return dp[index][prev+1] = 0;
@@ -18,6 +18,7 @@ class Solution {
     
     public int maxUncrossedLines(int[] nums1, int[] nums2) {
         HashMap<Integer, ArrayList<Integer>> map = new HashMap<>();
+        dp = new int[nums1.length+2][nums2.length+2];
         for(int i=0; i<dp.length; i++) Arrays.fill(dp[i], -1);
         for(int i=0; i<nums2.length; i++){
             if(!map.containsKey(nums2[i])){
