@@ -6,12 +6,11 @@ class Solution {
         if(!map.containsKey(nums1[index])) return dp[index][prev+1] = helper(nums1, map, index+1, prev);
         if(map.get(nums1[index]).get(map.get(nums1[index]).size()-1)<=prev) return dp[index][prev+1] = helper(nums1, map, index+1, prev);
         ArrayList<Integer> list = map.get(nums1[index]);
-        int idx = -1;
-        for(int i=0; i<list.size(); i++){
-            if(list.get(i)>prev){
-                idx = i;
-                break;
-            }
+        int idx = Collections.binarySearch(list, prev);
+        if(idx>=0) idx++;
+        else{
+            idx++;
+            idx*=-1;
         }
         
         return dp[index][prev+1] = Math.max(helper(nums1, map, index+1, prev), 1 + helper(nums1, map, index+1, list.get(idx)));      
